@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rock Paper Scissors</title>
+</head>
+<body>
+
+    <header class="main">
+        <h1>Rock Paper Scissors</h1>
+    </header>
+        
+        <div class="main">
+            <h2>Please choose wisely</h2>
+            <!-- <br> -->
+            <button onclick="rockfunction()">Rock</button>
+            <button onclick="paperfunction()">Paper</button>
+            <button onclick="scissorfunction()">Scissors</button>
+            <button onclick="resetfunction()">Reset</button>
+            <br>
+            <h2>The Computer chose: <span id="computerOutput"> </span></h2>
+            <h3>Plaver Wins: <span id="playerScore"> </span></h3>
+            <h3>Computer Wins: <span id="computerScore"> </span></h3>
+            <h3>Ties: <span id="tieCounter"> </span></h3>
+
+        </div>
+
+
+    <script type="text/javascript">
+        var player = 0;
+        var computer = 0;
+        var tie = 0;
+        var playerChoice =" "; //choice1
+        var computerChoice=""; //choice2
+        var rNum =0;
+
+
+        //comparison function given two choices where choice1 = Player choice and choice2 = Computer choice
+        function compare (choice1, choice2){
+            if (choice1 === choice2){
+                tie++;
+            }
+            else if (choice1 === "p"){
+                if (choice2 === "r" ){
+                    player++;
+                }
+                else{
+                    computer++
+                }
+            }
+            else if (choice1 === "r"){
+                if (choice2 === "s"){
+                    player++;
+                }
+                else{
+                    computer++
+                }
+            }
+            else if (choice1 === "s") {
+                if (choice2 === "p"){
+                    player++;
+                }
+                else{
+                    computer++;
+                }
+            }
+        }
+         
+        //functions iniated at button click. Assign button choice to variable player choice.    
+        function rockfunction(){
+            playerChoice = "r";
+            computerSelection();
+            compare(playerChoice,computerChoice);
+            scoreOutput();
+        }
+
+        function paperfunction(){
+            playerChoice = "p";
+            computerSelection();
+            compare(playerChoice,computerChoice);
+            scoreOutput();
+        }
+
+        function scissorfunction(){
+            playerChoice = "s";
+            computerSelection();
+            compare(playerChoice,computerChoice);
+            scoreOutput();
+        }
+
+        function resetfunction(){
+            player = 0;
+            computer = 0;
+            tie = 0;
+            playerChoice = " ";
+            computerChoice = "";
+            scoreOutput();
+        }
+
+        //function calls getRandom function and proceeds to assign computer choice based on random number
+        function computerSelection (){
+            function getRandom(){
+            return Math.random();
+            }
+
+            rNum = getRandom();
+
+            //Logic to assign computer choice based on random number generated.
+            if (rNum <= .33){
+                computerChoice = "r";
+            }
+            else if (rNum >.33 && rNum <.68){
+                computerChoice = "p";
+            }
+            else if (rNum >.67){
+                computerChoice = "s"
+            }
+         };   
+
+        //Score output to HTML
+        function scoreOutput(){
+            document.getElementById("playerScore").innerHTML=player;
+            document.getElementById("computerScore").innerHTML=computer;
+            document.getElementById("tieCounter").innerHTML=tie;
+            document.getElementById("computerOutput").innerHTML=computerChoice;
+        }
+
+        console.log(compare(playerChoice,computerChoice));
+        console.log(player);
+        console.log(computer);
+        console.log(tie);
+    </script>
+
+</body>
+</html>
